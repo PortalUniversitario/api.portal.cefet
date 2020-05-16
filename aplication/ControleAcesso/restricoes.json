@@ -1,0 +1,14 @@
+{
+    "matricula" :{
+        "valid": ["*"],
+        "invalid": null
+    },
+    "curso":{
+        "valid" : ["ENGENHARIA DE COMPUTACAO"],
+        "invalid" : null
+    },
+    "campus":{
+        "valid" : ["PET"],
+        "invalid" : null
+    }
+}

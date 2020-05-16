@@ -1,0 +1,34 @@
+{
+    "ANG":{
+        "nome":"Angra dos Reis",
+        "img":"sources/img_campus_ang.jpg"
+    },
+    "FRI":{
+        "nome":"Nova Friburgo",
+        "img":"sources/img_campus_fri.jpg"
+    },
+    "ITA":{
+        "nome":"Itaguaí",
+        "img":"sources/img_campus_ita.jpg"
+    },
+    "MAR":{
+        "nome":"Maracanã",
+        "img":"sources/img_campus_mar.jpg"
+    },
+    "MDG":{
+        "nome":"Maria da Graça",
+        "img":"sources/img_campus_mdg.jpg"
+    },
+    "NIG":{
+        "nome":"Nova Iguaçu",
+        "img":"sources/img_campus_nig.jpg"
+    },
+    "PET":{
+        "nome":"Petrópolis",
+        "img":"sources/img_campus_pet.jpg"
+    },
+    "VAL":{
+        "nome":"Valença",
+        "img":"sources/img_campus_val.jpg"
+    }
+}
