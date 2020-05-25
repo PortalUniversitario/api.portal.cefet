@@ -147,7 +147,49 @@ def campusFoto(codeCampus):
     return jsonify(hel.object.toJson(result))
 #------------------------------------------------
 
-#ERROR HANDLER-----------------------------------
+#PERIODOS----------------------------------------
+@app.route('/nota', methods_=['GET'])
+def periodos():
+    result = ent.Resultado()
+    try:
+        cookie = request.args.get('cookie')
+        matricula = request.args.get('matricula')
+        result = apli.Periodo.getPeriodo(cookie, matricula)
+    except:
+        result.data = "Erro: Falha interna no servidor"
+        result.code = hel.HttpCodes.INTERNAL_SERVER_ERROR
+    
+    return jsonify(hel.object.toJson(result))
+#-------------------------------------------------
+
+#DISCIPLINAS--------------------------------------
+@app.route('/nota', methods_=['GET'])
+def getAllDisciplinas():
+    result= ent.Resultado()
+    try:
+        cookie = request.args.get('cookie')
+        matricula = request.args.get('matricula')
+        result = apli.Periodo.getAllDisciplinas(cookie, matricula)
+    except:
+        result.data = "Erro: Falha interna no servidor"
+        result.code = hel.HttpCodes.INTERNAL_SERVER_ERROR
+    
+    return jsonify(hel.object.toJson(result))
+
+def getDiscByPeriodo():
+    result= ent.Resultado()    #Perguntar se Disciplinas deveria estar nesse app.route /nota
+    try:
+        cookie = request.args.get('cookie')
+        matricula = request.args.get('matricula')
+        result = apli.Periodo.getDiscByPeriodo(cookie, matricula)
+    except:
+        result.data = "Erro: Falha interna no servidor"
+        result.code = hel.HttpCodes.INTERNAL_SERVER_ERROR
+    
+    return jsonify(hel.object.toJson(result))
+#-------------------------------------------------
+
+#ERROR HANDLER------------------------------------
 @app.errorhandler(hel.HttpCodes.NOT_FOUND)
 def respond404(error):
     result = ent.Resultado()
