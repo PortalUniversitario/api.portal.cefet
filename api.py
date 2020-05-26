@@ -148,7 +148,7 @@ def campusFoto(codeCampus):
 #------------------------------------------------
 
 #PERIODOS----------------------------------------
-@app.route('/periodo', methods_=['GET'])
+@app.route('/periodo', methods=['GET'])
 def periodos():
     result = ent.Resultado()
     try:
@@ -163,7 +163,7 @@ def periodos():
 #-------------------------------------------------
 
 #DISCIPLINAS--------------------------------------
-@app.route('/disciplina', methods_=['GET'])
+@app.route('/disciplina', methods=['GET'])
 def getAllDisciplinas():
     result= ent.Resultado()
     try:
