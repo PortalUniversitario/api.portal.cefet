@@ -9,7 +9,7 @@ import helper as hel
 
 app = Flask(__name__)
 
-#AUTENTICACAO------------------------------------
+#AUTENTICACAO sasad------------------------------------
 @app.route('/autenticacao', methods=['POST'])
 def autenticacao():
     result = ent.Resultado()
