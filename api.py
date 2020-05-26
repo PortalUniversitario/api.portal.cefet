@@ -9,6 +9,7 @@ import helper as hel
 
 app = Flask(__name__)
 #jonatas harleydeividson
+#nova alteracao by hallidaystzion
 #AUTENTICACAO------------------------------------
 @app.route('/autenticacao', methods=['POST'])
 def autenticacao():
