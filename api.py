@@ -176,12 +176,13 @@ def getAllDisciplinas():
     
     return jsonify(hel.object.toJson(result))
 
-def getDiscByPeriodo():
-    result= ent.Resultado()    #Perguntar se Disciplinas deveria estar nesse app.route /nota
+@app.route('/disciplina/<codPeriodo>', methods=['GET'])
+def getDiscByPeriodo(codPeriodo):
+    result= ent.Resultado()   
     try:
         cookie = request.args.get('cookie')
         matricula = request.args.get('matricula')
-        result = apli.Periodo.getDiscByPeriodo(cookie, matricula)
+        result = apli.Periodo.getDiscByPeriodo(cookie, matricula,codPeriodo)
     except:
         result.data = "Erro: Falha interna no servidor"
         result.code = hel.HttpCodes.INTERNAL_SERVER_ERROR
@@ -215,5 +216,5 @@ def respond500(error):
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
-    app.run(debug=False, host='0.0.0.0', port=port)  # para prod, ative aqui!
-    #app.run(debug=True, host='127.0.0.1', port=port)  # para dev, ative aqui!
+    app.run(debug=False, host='0.0.0.0', port=port)  # para prod, ative aqui! Para commitar
+    #app.run(debug=True, host='127.0.0.1', port=port)  # para dev, ative aqui! Para testar em local host

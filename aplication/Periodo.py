@@ -13,7 +13,7 @@ def getPeriodo(cookie,matricula):
     try:
         result.data = infra.Periodo.getPeriodo(cookie, matricula)
         result.code = hel.HttpCodes.OK   
-    except ValueError as erro:    #O que é isso?
+    except ValueError as erro:    #O que é isso? Está replicando o erro que foi dito pela infra.
         result.data = erro.args.__getitem__(0)
         result.code = erro.args.__getitem__(1)
         
@@ -31,12 +31,12 @@ def getAllDisciplinas(cookie,matricula):
         result.data = infra.Periodo.getAllDisciplinas(cookie, matricula)
         result.code = hel.HttpCodes.OK  
     except ValueError as erro:   
-        result.data = erro.args.__getitem__(0) # Esse erro ta fazendo referencia ao erro handler da api? 404 e 400?
+        result.data = erro.args.__getitem__(0) 
         result.code = erro.args.__getitem__(1)
         
     return result
 
-def getDiscByPeriodo(cookie,matricula):
+def getDiscByPeriodo(cookie,matricula,codPeriodo):
     """
     Descrição:
 
@@ -45,7 +45,7 @@ def getDiscByPeriodo(cookie,matricula):
     """
     result = endi.Resultado()
     try:
-        result.data = infra.Periodo.getDiscByPeriodo(cookie, matricula)
+        result.data = infra.Periodo.getDiscByPeriodo(cookie, matricula,codPeriodo)
         result.code = hel.HttpCodes.OK  
     except ValueError as erro:   
         result.data = erro.args.__getitem__(0) 
