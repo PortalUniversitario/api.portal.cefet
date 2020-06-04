@@ -149,7 +149,7 @@ def campusFoto(codeCampus):
 
 #PERIODOS----------------------------------------
 @app.route('/periodo', methods=['GET'])
-def getPeriodos():
+def getPeriodo():
     result = ent.Resultado()
     try:
         cookie = request.args.get('cookie')
