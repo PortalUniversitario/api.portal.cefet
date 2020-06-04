@@ -22,14 +22,13 @@ def getPeriodo(cookie, matricula):
     try:
         Periodos=[]
         for item in sitePeriodosBS.find_all('a', class_= "accordionTurma"):
-            a=""
-            a=hel.string.strNormalize(item.string)
-            periodo=entity.Periodo()
-            periodo.cod=a[:2]
-            periodo.cod+=a[11:]
+            a = ""
+            a = hel.string.strNormalize(item.string)
+            periodo = entity.Periodo()
+            periodo.cod = a[13:] + "." + a[:1]
             Periodos.append(periodo)
             
-            return Periodos
+        return Periodos
     except:
         raise ValueError("Cookie ou Matrícula Inválidos", hel.HttpCodes.NOT_ACCEPTABLE)
     
@@ -50,9 +49,8 @@ def getAllDisciplinas(cookie,matricula):
     
     try:
         Disciplinas=[]
-        soup = bs(html, 'html.parser')
 
-        tabelas = soup.find_all("table", {"class": "table-turmas"})
+        tabelas = sitePeriodosBS.find_all("table", {"class": "table-turmas"})
         for tabela in tabelas:
             tbody = tabela.find("tbody")
             linhas = tbody.find_all("tr")
@@ -67,7 +65,7 @@ def getAllDisciplinas(cookie,matricula):
                     disciplina.codTurma      = hel.string.strNormalize(itens[2].get_text())
                     Disciplinas.append(disciplina)
                 
-                return Disciplinas
+        return Disciplinas
     except:
         raise ValueError("Cookie ou Matrícula Inválidos", hel.HttpCodes.NOT_ACCEPTABLE)
     
@@ -78,11 +76,12 @@ def getDiscbyPeriodo(cookie,matricula,codPeriodo):
     Resulta em uma lista de disciplinas por período para o usuário.
     Em caso de sucesso retorna uma lista do tipo entities.Disciplina().
     """
+    
     try:
         requestSession = Session()
         requestSession.cookies.set("JSESSIONID", cookie)
-        siteRelatorios = requestSession.get(hel.URLs.PERIODO + matricula)
-        siteRelatoriosBS = bs(siteRelatorios.content, "html.parser")
+        sitePeriodos = requestSession.get(hel.URLs.PERIODO + matricula)
+        sitePeriodosBS = bs(sitePeriodos.content, "html.parser")
     except:
         raise ValueError("Falha ao acessar portal do aluno", hel.HttpCodes.REQUEST_TIMEOUT)
     
@@ -91,22 +90,22 @@ def getDiscbyPeriodo(cookie,matricula,codPeriodo):
         Periodos=getPeriodo() #Pode dar merda
         for i in range(len(Periodos)):
             if (Periodos[i]['codPeriodo'] == codPeriodo): 
-            soup = bs(html, 'html.parser')
-            tabelas = soup.find_all("table", {"class": "table-turmas"})
-            tbody = tabelas[i].find("tbody")
-            linhas = tbody.find_all("tr")
-            for linha in linhas:
-                itens = linha.find_all("td")
-                if (len(itens) >= 3):
-                    disciplina=entity.Disciplina()
-                    nome, cod = trataDisciplina(itens[0].get_text())
-                    disciplina.nome          = nome
-                    disciplina.codDisciplina = cod
-                    disciplina.situacao      = normalizacao2(itens[1].get_text())
-                    disciplina.codTurma      = normalizacao2(itens[2].get_text())
+                soup = bs(html, 'html.parser')
+                tabelas = soup.find_all("table", {"class": "table-turmas"})
+                tbody = tabelas[i].find("tbody")
+                linhas = tbody.find_all("tr")
+                for linha in linhas:
+                    itens = linha.find_all("td")
+                    if (len(itens) >= 3):
+                        disciplina= entity.Disciplina()
+                        nome, cod = trataDisciplina(itens[0].get_text())
+                        disciplina.nome          = nome
+                        disciplina.codDisciplina = cod
+                        disciplina.situacao      = hel.string.strNormalize(itens[1].get_text())
+                        disciplina.codTurma      = hel.string.strNormalize(itens[2].get_text())
                 
-                    Disciplinas.append(disciplina)
-            return Disciplinas
+                        Disciplinas.append(disciplina)
+        return Disciplinas
             
     except:
         raise ValueError("Cookie ou Matrícula Inválidos", hel.HttpCodes.NOT_ACCEPTABLE)
