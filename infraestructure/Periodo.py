@@ -69,7 +69,7 @@ def getAllDisciplinas(cookie,matricula):
     except:
         raise ValueError("Cookie ou Matrícula Inválidos", hel.HttpCodes.NOT_ACCEPTABLE)
     
-def getDiscbyPeriodo(cookie,matricula,codPeriodo):
+def getDiscByPeriodo(cookie,matricula,codPeriodo):
     """
     Descrição:
 
@@ -87,11 +87,10 @@ def getDiscbyPeriodo(cookie,matricula,codPeriodo):
     
     try:
         Disciplinas=[]
-        Periodos=getPeriodo() #Pode dar merda
+        Periodos=getPeriodo(cookie,matricula)
         for i in range(len(Periodos)):
-            if (Periodos[i]['codPeriodo'] == codPeriodo): 
-                soup = bs(html, 'html.parser')
-                tabelas = soup.find_all("table", {"class": "table-turmas"})
+            if (Periodos[i].cod == codPeriodo): 
+                tabelas = sitePeriodosBS.find_all("table", {"class": "table-turmas"})
                 tbody = tabelas[i].find("tbody")
                 linhas = tbody.find_all("tr")
                 for linha in linhas:
@@ -115,8 +114,8 @@ def getDiscbyPeriodo(cookie,matricula,codPeriodo):
 def trataDisciplina(texto):
     try:
         texto2 = texto.split("(")
-        nome = hel.string.strNormalize(texto2[0])
-        cod  = hel.string.strNormalize(texto2[1])
+        nome = hel.string.strNormalize(texto2[0]).strip()
+        cod  = hel.string.strNormalize(texto2[1]).replace(")","").strip()
         return nome, cod
     except:
         return texto2, texto2
