@@ -160,9 +160,7 @@ def getPeriodo():
         result.code = hel.HttpCodes.INTERNAL_SERVER_ERROR
     
     return jsonify(hel.object.toJson(result))
-#-------------------------------------------------
 
-#DISCIPLINAS--------------------------------------
 @app.route('/periodos/disciplinas', methods=['GET'])
 def getAllDisciplinas():
     result= ent.Resultado()
@@ -183,6 +181,21 @@ def getDiscByPeriodo(codPeriodo):
         cookie = request.args.get('cookie')
         matricula = request.args.get('matricula')
         result = apli.Periodo.getDiscByPeriodo(cookie, matricula,codPeriodo)
+    except:
+        result.data = "Erro: Falha interna no servidor"
+        result.code = hel.HttpCodes.INTERNAL_SERVER_ERROR
+    
+    return jsonify(hel.object.toJson(result))
+#-------------------------------------------------
+
+#TURMAS-------------------------------------------
+@app.route('/turmas/<codTurma>', methods=['GET'])
+def getDiscByCod(codTurma):
+    result= ent.Resultado()   
+    try:
+        cookie = request.args.get('cookie')
+        matricula = request.args.get('matricula')
+        #result = apli.Periodo.getDiscByCod(cookie, matricula, codPeriodo, codDisciplina)
     except:
         result.data = "Erro: Falha interna no servidor"
         result.code = hel.HttpCodes.INTERNAL_SERVER_ERROR

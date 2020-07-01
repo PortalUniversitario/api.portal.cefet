@@ -63,6 +63,14 @@ def getAllDisciplinas(cookie,matricula):
                     disciplina.codDisciplina = cod
                     disciplina.situacao      = hel.string.strNormalize(itens[1].get_text())
                     disciplina.codTurma      = hel.string.strNormalize(itens[2].get_text())
+
+                    p1, p2, pf, media, mediaFinal = getNotas(trataLinkDisciplina(itens[3].find("a")['href']), requestSession)
+                    disciplina.p1 = p1
+                    disciplina.p2 = p2
+                    disciplina.pf = pf
+                    disciplina.media = media
+                    disciplina.mediaFinal = mediaFinal
+
                     Disciplinas.append(disciplina)
                 
         return Disciplinas
@@ -87,7 +95,7 @@ def getDiscByPeriodo(cookie,matricula,codPeriodo):
     
     try:
         Disciplinas=[]
-        Periodos=getPeriodo(cookie,matricula) #<- Assim não dá merda :)
+        Periodos=getPeriodo(cookie,matricula)
         for i in range(len(Periodos)):
             if (Periodos[i].cod == codPeriodo):
                 tabelas = sitePeriodosBS.find_all("table", {"class": "table-turmas"})
@@ -102,7 +110,14 @@ def getDiscByPeriodo(cookie,matricula,codPeriodo):
                         disciplina.codDisciplina = cod
                         disciplina.situacao      = hel.string.strNormalize(itens[1].get_text())
                         disciplina.codTurma      = hel.string.strNormalize(itens[2].get_text())
-                
+                        
+                        p1, p2, pf, media, mediaFinal = getNotas(trataLinkDisciplina(itens[3].find("a")['href']), requestSession)
+                        disciplina.p1 = p1
+                        disciplina.p2 = p2
+                        disciplina.pf = pf
+                        disciplina.media = media
+                        disciplina.mediaFinal = mediaFinal
+                        
                         Disciplinas.append(disciplina)
         return Disciplinas
             
@@ -111,6 +126,35 @@ def getDiscByPeriodo(cookie,matricula,codPeriodo):
     
     
 #region FUNCOES AUX 
+def getNotas(link, requestSession):
+    try:
+        siteDisciplina = requestSession.get(link)
+        siteDisciplinaBS = bs(siteDisciplina.content, "html.parser")
+        
+        tabela_notas = siteDisciplinaBS.find("table", {"class": "nota"})
+        
+        if (tabela_notas != None):
+            itens = tabela_notas.find("tbody").find("tr").find_all("td")
+            p1 = hel.string.strNormalize(itens[2].get_text()).replace(" ", "")
+            p2 = hel.string.strNormalize(itens[5].get_text()).replace(" ", "")
+            pf = hel.string.strNormalize(itens[8].get_text()).replace(" ", "")
+            media = hel.string.strNormalize(itens[7].get_text()).replace(" ", "")
+            mediaFinal = hel.string.strNormalize(itens[9].get_text()).replace(" ", "")
+
+            return p1, p2, pf, media, mediaFinal
+        else:
+            return "", "", "", "", ""
+    except:
+        raise ValueError("Falha ao acessar portal do aluno", hel.HttpCodes.REQUEST_TIMEOUT)
+
+def trataLinkDisciplina(texto):
+    try:
+        texto2 = texto.split(",")
+        link = hel.URLs.ENDPOINT + texto2[0].replace("javascript:loadDialog(", "").replace("'", "")
+        return link
+    except:
+        return texto2
+
 def trataDisciplina(texto):
     try:
         texto2 = texto.split("(")

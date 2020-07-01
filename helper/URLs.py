@@ -8,3 +8,5 @@ RELATORIOS = 'https://alunos.cefet-rj.br/aluno/aluno/relatorio/relatorios.action
 LOGIN = 'https://alunos.cefet-rj.br/aluno/login.action?error='
 AUTENTICACAO = 'https://alunos.cefet-rj.br/aluno/j_security_check'
 PERIODO = 'https://alunos.cefet-rj.br/aluno/aluno/nota/nota.action?matricula='
+ENDPOINT = 'https://alunos.cefet-rj.br'
+TURMA = 'https://alunos.cefet-rj.br/aluno/aluno/turma.action?turma='
