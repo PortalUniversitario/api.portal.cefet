@@ -13,7 +13,7 @@ def getPeriodo(cookie,matricula):
     try:
         result.data = infra.Periodo.getPeriodo(cookie, matricula)
         result.code = hel.HttpCodes.OK   
-    except ValueError as erro:    #O que é isso? Está replicando o erro que foi dito pela infra.
+    except ValueError as erro:
         result.data = erro.args.__getitem__(0)
         result.code = erro.args.__getitem__(1)
         
