@@ -87,7 +87,7 @@ def getDiscByPeriodo(cookie,matricula,codPeriodo):
     
     try:
         Disciplinas=[]
-        Periodos=getPeriodo() #Pode dar merda
+        Periodos=getPeriodo(cookie,matricula) #<- Assim não dá merda :)
         for i in range(len(Periodos)):
             if (Periodos[i]['codPeriodo'] == codPeriodo): 
                 soup = bs(html, 'html.parser')
