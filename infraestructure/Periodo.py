@@ -116,7 +116,7 @@ def trataDisciplina(texto):
     try:
         texto2 = texto.split("(")
         nome = hel.string.strNormalize(texto2[0])
-        cod  = hel.string.strNormalize(texto2[1])
+        cod  = hel.string.strNormalize(texto2[1]).replace(")","").strip()
         return nome, cod
     except:
         return texto2, texto2
