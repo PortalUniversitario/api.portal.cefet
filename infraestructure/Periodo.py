@@ -115,7 +115,7 @@ def getDiscByPeriodo(cookie,matricula,codPeriodo):
 def trataDisciplina(texto):
     try:
         texto2 = texto.split("(")
-        nome = hel.string.strNormalize(texto2[0])
+        nome = hel.string.strNormalize(texto2[0]).strip()
         cod  = hel.string.strNormalize(texto2[1]).replace(")","").strip()
         return nome, cod
     except:
