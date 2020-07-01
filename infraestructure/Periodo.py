@@ -69,7 +69,7 @@ def getAllDisciplinas(cookie,matricula):
     except:
         raise ValueError("Cookie ou Matrícula Inválidos", hel.HttpCodes.NOT_ACCEPTABLE)
     
-def getDiscbyPeriodo(cookie,matricula,codPeriodo):
+def getDiscByPeriodo(cookie,matricula,codPeriodo):
     """
     Descrição:
 
