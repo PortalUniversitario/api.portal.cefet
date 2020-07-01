@@ -147,7 +147,50 @@ def campusFoto(codeCampus):
     return jsonify(hel.object.toJson(result))
 #------------------------------------------------
 
-#ERROR HANDLER-----------------------------------
+#PERIODOS----------------------------------------
+@app.route('/periodo', methods=['GET'])
+def getPeriodo():
+    result = ent.Resultado()
+    try:
+        cookie = request.args.get('cookie')
+        matricula = request.args.get('matricula')
+        result = apli.Periodo.getPeriodo(cookie, matricula)
+    except:
+        result.data = "Erro: Falha interna no servidor"
+        result.code = hel.HttpCodes.INTERNAL_SERVER_ERROR
+    
+    return jsonify(hel.object.toJson(result))
+#-------------------------------------------------
+
+#DISCIPLINAS--------------------------------------
+@app.route('/disciplina', methods=['GET'])
+def getAllDisciplinas():
+    result= ent.Resultado()
+    try:
+        cookie = request.args.get('cookie')
+        matricula = request.args.get('matricula')
+        result = apli.Periodo.getAllDisciplinas(cookie, matricula)
+    except:
+        result.data = "Erro: Falha interna no servidor"
+        result.code = hel.HttpCodes.INTERNAL_SERVER_ERROR
+    
+    return jsonify(hel.object.toJson(result))
+
+@app.route('/disciplina/<codPeriodo>', methods=['GET'])
+def getDiscByPeriodo(codPeriodo):
+    result= ent.Resultado()   
+    try:
+        cookie = request.args.get('cookie')
+        matricula = request.args.get('matricula')
+        result = apli.Periodo.getDiscByPeriodo(cookie, matricula,codPeriodo)
+    except:
+        result.data = "Erro: Falha interna no servidor"
+        result.code = hel.HttpCodes.INTERNAL_SERVER_ERROR
+    
+    return jsonify(hel.object.toJson(result))
+#-------------------------------------------------
+
+#ERROR HANDLER------------------------------------
 @app.errorhandler(hel.HttpCodes.NOT_FOUND)
 def respond404(error):
     result = ent.Resultado()
@@ -173,5 +216,5 @@ def respond500(error):
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
-    app.run(debug=False, host='0.0.0.0', port=port)  # para prod, ative aqui!
-    #app.run(debug=True, host='127.0.0.1', port=port)  # para dev, ative aqui!
+    #app.run(debug=False, host='0.0.0.0', port=port)  # para prod, ative aqui! Para commitar
+    app.run(debug=True, host='127.0.0.1', port=port)  # para dev, ative aqui! Para testar em local host
