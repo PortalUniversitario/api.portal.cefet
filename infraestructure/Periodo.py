@@ -91,7 +91,7 @@ def getDiscByPeriodo(cookie,matricula,codPeriodo):
         for i in range(len(Periodos)):
             if (Periodos[i]['codPeriodo'] == codPeriodo): 
                 soup = bs(html, 'html.parser')
-                tabelas = soup.find_all("table", {"class": "table-turmas"})
+                tabelas = sitePeriodosBS.find_all("table", {"class": "table-turmas"})
                 tbody = tabelas[i].find("tbody")
                 linhas = tbody.find_all("tr")
                 for linha in linhas:
