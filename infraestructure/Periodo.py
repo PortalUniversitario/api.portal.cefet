@@ -27,7 +27,6 @@ def getPeriodo(cookie, matricula):
             periodo = entity.Periodo()
             periodo.cod = a[13:] + "." + a[:1]
             Periodos.append(periodo)
-            
         return Periodos
     except:
         raise ValueError("Cookie ou Matrícula Inválidos", hel.HttpCodes.NOT_ACCEPTABLE)
