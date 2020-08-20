@@ -27,7 +27,6 @@ def getPeriodo(cookie, matricula):
             periodo = entity.Periodo()
             periodo.cod = a[13:] + "." + a[:1]
             Periodos.append(periodo)
-            
         return Periodos
     except:
         raise ValueError("Cookie ou Matrícula Inválidos", hel.HttpCodes.NOT_ACCEPTABLE)
@@ -89,7 +88,7 @@ def getDiscByPeriodo(cookie,matricula,codPeriodo):
         Disciplinas=[]
         Periodos=getPeriodo(cookie,matricula)
         for i in range(len(Periodos)):
-            if (Periodos[i].cod == codPeriodo): 
+            if (Periodos[i].cod == codPeriodo):
                 tabelas = sitePeriodosBS.find_all("table", {"class": "table-turmas"})
                 tbody = tabelas[i].find("tbody")
                 linhas = tbody.find_all("tr")
