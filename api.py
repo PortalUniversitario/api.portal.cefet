@@ -8,7 +8,7 @@ import entities as ent
 import helper as hel
 
 app = Flask(__name__)
-
+#alterado
 #AUTENTICACAO------------------------------------
 @app.route('/autenticacao', methods=['POST'])
 def autenticacao():
@@ -148,7 +148,7 @@ def campusFoto(codeCampus):
 #------------------------------------------------
 
 #PERIODOS----------------------------------------
-@app.route('/periodo', methods=['GET'])
+@app.route('/periodos', methods=['GET'])
 def getPeriodo():
     result = ent.Resultado()
     try:
@@ -160,10 +160,8 @@ def getPeriodo():
         result.code = hel.HttpCodes.INTERNAL_SERVER_ERROR
     
     return jsonify(hel.object.toJson(result))
-#-------------------------------------------------
 
-#DISCIPLINAS--------------------------------------
-@app.route('/disciplina', methods=['GET'])
+@app.route('/periodos/disciplinas', methods=['GET'])
 def getAllDisciplinas():
     result= ent.Resultado()
     try:
@@ -176,13 +174,28 @@ def getAllDisciplinas():
     
     return jsonify(hel.object.toJson(result))
 
-@app.route('/disciplina/<codPeriodo>', methods=['GET'])
+@app.route('/periodos/<codPeriodo>/disciplinas', methods=['GET'])
 def getDiscByPeriodo(codPeriodo):
     result= ent.Resultado()   
     try:
         cookie = request.args.get('cookie')
         matricula = request.args.get('matricula')
         result = apli.Periodo.getDiscByPeriodo(cookie, matricula,codPeriodo)
+    except:
+        result.data = "Erro: Falha interna no servidor"
+        result.code = hel.HttpCodes.INTERNAL_SERVER_ERROR
+    
+    return jsonify(hel.object.toJson(result))
+#-------------------------------------------------
+
+#TURMAS-------------------------------------------
+@app.route('/turmas/<codTurma>', methods=['GET'])
+def getDiscByCod(codTurma):
+    result= ent.Resultado()   
+    try:
+        cookie = request.args.get('cookie')
+        matricula = request.args.get('matricula')
+        #result = apli.Periodo.getDiscByCod(cookie, matricula, codPeriodo, codDisciplina)
     except:
         result.data = "Erro: Falha interna no servidor"
         result.code = hel.HttpCodes.INTERNAL_SERVER_ERROR
@@ -216,5 +229,5 @@ def respond500(error):
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
-    #app.run(debug=False, host='0.0.0.0', port=port)  # para prod, ative aqui! Para commitar
-    app.run(debug=True, host='127.0.0.1', port=port)  # para dev, ative aqui! Para testar em local host
+    app.run(debug=False, host='0.0.0.0', port=port)  # para prod, ative aqui! Para commitar
+    #app.run(debug=True, host='127.0.0.1', port=port)  # para dev, ative aqui! Para testar em local host
