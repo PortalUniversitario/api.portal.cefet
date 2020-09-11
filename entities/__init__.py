@@ -8,3 +8,5 @@ from entities.perfil import Perfil
 from entities.periodo import Periodo
 from entities.disciplina import Disciplina
 from entities.noticias import Noticias
+from entities.disciplina import Disciplina 
+from entities.horarios import Horarios
