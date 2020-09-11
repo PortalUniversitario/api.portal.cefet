@@ -1,6 +1,5 @@
 from requests import Session
 from bs4 import BeautifulSoup as bs
-#import re
 import helper as hel
 import entities as entity
 
@@ -27,7 +26,6 @@ def getPeriodo(cookie, matricula):
             periodo = entity.Periodo()
             periodo.cod = a[13:] + "." + a[:1]
             Periodos.append(periodo)
-            
         return Periodos
     except:
         raise ValueError("Cookie ou Matrícula Inválidos", hel.HttpCodes.NOT_ACCEPTABLE)
@@ -125,7 +123,7 @@ def getDiscByPeriodo(cookie,matricula,codPeriodo):
         raise ValueError("Cookie ou Matrícula Inválidos", hel.HttpCodes.NOT_ACCEPTABLE)
     
     
-#region FUNCOES AUX 
+# AUX functions region
 def getNotas(link, requestSession):
     try:
         siteDisciplina = requestSession.get(link)

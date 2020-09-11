@@ -145,6 +145,17 @@ def campusFoto(codeCampus):
         result.code = hel.HttpCodes.INTERNAL_SERVER_ERROR
 
     return jsonify(hel.object.toJson(result))
+
+@app.route('/campus/<codeCampus>/rss', methods=['GET'])
+def campusNoticias(codeCampus):
+    result = ent.Resultado()
+    try:
+        result = apli.Campus.getNoticias(codeCampus)
+    except:
+        result.data = "Erro: Falha interna no servidor"
+        result.code = hel.HttpCodes.INTERNAL_SERVER_ERROR
+
+    return jsonify(hel.object.toJson(result))
 #------------------------------------------------
 
 #PERIODOS----------------------------------------
@@ -196,6 +207,20 @@ def getDiscByCod(codTurma):
         cookie = request.args.get('cookie')
         matricula = request.args.get('matricula')
         #result = apli.Periodo.getDiscByCod(cookie, matricula, codPeriodo, codDisciplina)
+    except:
+        result.data = "Erro: Falha interna no servidor"
+        result.code = hel.HttpCodes.INTERNAL_SERVER_ERROR
+    
+    return jsonify(hel.object.toJson(result))
+#-------------------------------------------------
+#HORÁRIOS-----------------------------------------
+@app.route('/horarios', methods=['GET'])
+def getHorarios():
+    result= ent.Resultado()   
+    try:
+        cookie = request.args.get('cookie')
+        matricula = request.args.get('matricula')
+        result = apli.Horarios.getHorarios(cookie, matricula)
     except:
         result.data = "Erro: Falha interna no servidor"
         result.code = hel.HttpCodes.INTERNAL_SERVER_ERROR
