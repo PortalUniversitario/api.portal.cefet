@@ -145,6 +145,17 @@ def campusFoto(codeCampus):
         result.code = hel.HttpCodes.INTERNAL_SERVER_ERROR
 
     return jsonify(hel.object.toJson(result))
+
+@app.route('/campus/<codeCampus>/rss', methods=['GET'])
+def campusNoticias(codeCampus):
+    result = ent.Resultado()
+    try:
+        result = apli.Campus.getNoticias(codeCampus)
+    except:
+        result.data = "Erro: Falha interna no servidor"
+        result.code = hel.HttpCodes.INTERNAL_SERVER_ERROR
+
+    return jsonify(hel.object.toJson(result))
 #------------------------------------------------
 
 #PERIODOS----------------------------------------

@@ -1,34 +1,47 @@
 {
     "ANG":{
         "nome":"Angra dos Reis",
-        "img":"sources/img_campus_ang.jpg"
+        "img":"sources/img_campus_ang.jpg",
+        "rss":"https://api.rss2json.com/v1/api.json?rss_url=http://www.cefet-rj.br/index.php/noticias-campus-angra-dos-reis?format=feed&type=atom"
     },
     "FRI":{
         "nome":"Nova Friburgo",
-        "img":"sources/img_campus_fri.jpg"
+        "img":"sources/img_campus_fri.jpg",
+        "rss":"https://api.rss2json.com/v1/api.json?rss_url=http://www.cefet-rj.br/index.php/noticias-campus-nova-friburgo?format=feed&type=atom"
     },
     "ITA":{
         "nome":"Itaguaí",
-        "img":"sources/img_campus_ita.jpg"
+        "img":"sources/img_campus_ita.jpg",
+        "rss":"https://api.rss2json.com/v1/api.json?rss_url=http://www.cefet-rj.br/index.php/noticias-campus-itaguai?format=feed&type=atom"
     },
     "MAR":{
         "nome":"Maracanã",
-        "img":"sources/img_campus_mar.jpg"
+        "img":"sources/img_campus_mar.jpg",
+        "rss":"https://api.rss2json.com/v1/api.json?rss_url=http://www.cefet-rj.br/index.php/noticias-campus-maracana?format=feed&type=atom"
     },
     "MDG":{
         "nome":"Maria da Graça",
-        "img":"sources/img_campus_mdg.jpg"
+        "img":"sources/img_campus_mdg.jpg",
+        "rss":"https://api.rss2json.com/v1/api.json?rss_url=http://www.cefet-rj.br/index.php/noticias-campus-maria-da-graca?format=feed&type=atom"
     },
     "NIG":{
         "nome":"Nova Iguaçu",
-        "img":"sources/img_campus_nig.jpg"
+        "img":"sources/img_campus_nig.jpg",
+        "rss":"https://api.rss2json.com/v1/api.json?rss_url=http://www.cefet-rj.br/index.php/noticias-campus-nova-iguacu?format=feed&type=atom"
     },
     "PET":{
         "nome":"Petrópolis",
-        "img":"sources/img_campus_pet.jpg"
+        "img":"sources/img_campus_pet.jpg",
+        "rss":"https://api.rss2json.com/v1/api.json?rss_url=http://www.cefet-rj.br/index.php/noticias-campus-petropolis?format=feed&type=atom"
     },
     "VAL":{
         "nome":"Valença",
-        "img":"sources/img_campus_val.jpg"
+        "img":"sources/img_campus_val.jpg",
+        "rss":"https://api.rss2json.com/v1/api.json?rss_url=http://www.cefet-rj.br/index.php/noticias-campus-valenca?format=feed&type=atom"
+    },
+    "ALL":{
+        "nome":"CEFT-RJ",
+        "img":"sources/img_campus_mar.jpg",
+        "rss":"https://api.rss2json.com/v1/api.json?rss_url=http://www.cefet-rj.br/index.php/noticias?format=feed&type=atom"
     }
 }
