@@ -202,6 +202,20 @@ def getDiscByCod(codTurma):
     
     return jsonify(hel.object.toJson(result))
 #-------------------------------------------------
+#HORÁRIOS-----------------------------------------
+@app.route('/horarios', methods=['GET'])
+def getHorarios():
+    result= ent.Resultado()   
+    try:
+        cookie = request.args.get('cookie')
+        matricula = request.args.get('matricula')
+        result = apli.Horarios.getHorarios(cookie, matricula)
+    except:
+        result.data = "Erro: Falha interna no servidor"
+        result.code = hel.HttpCodes.INTERNAL_SERVER_ERROR
+    
+    return jsonify(hel.object.toJson(result))
+#-------------------------------------------------
 
 #ERROR HANDLER------------------------------------
 @app.errorhandler(hel.HttpCodes.NOT_FOUND)
