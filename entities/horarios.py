@@ -1,9 +1,9 @@
-class Horarios:
-    horarios.disciplina = None
-    horarios.codTurma   = None
-    horarios.segunda    = None 
-    horarios.terca      = None
-    horarios.quarta     = None
-    horarios.quinta     = None
-    horarios.sexta      = None
-    Horarios.sabado     = None
+class Horarios():
+    disciplina = None
+    codTurma   = None
+    segunda    = None 
+    terca      = None
+    quarta     = None
+    quinta     = None
+    sexta      = None
+    sabado     = None
