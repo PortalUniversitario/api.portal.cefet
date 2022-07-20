@@ -92,31 +92,98 @@ def getDiscByPeriodo(cookie,matricula,codPeriodo):
         raise ValueError("Falha ao acessar portal do aluno", hel.HttpCodes.REQUEST_TIMEOUT)
     
     try:
-        Disciplinas=[]
-        Periodos=getPeriodo(cookie,matricula)
-        for i in range(len(Periodos)):
-            if (Periodos[i].cod == codPeriodo):
-                tabelas = sitePeriodosBS.find_all("table", {"class": "table-turmas"})
-                tbody = tabelas[i].find("tbody")
-                linhas = tbody.find_all("tr")
-                for linha in linhas:
-                    itens = linha.find_all("td")
-                    if (len(itens) >= 3):
-                        disciplina= entity.Disciplina()
-                        nome, cod = trataDisciplina(itens[0].get_text())
-                        disciplina.nome          = nome
-                        disciplina.codDisciplina = cod
-                        disciplina.situacao      = hel.string.strNormalize(itens[1].get_text())
-                        disciplina.codTurma      = hel.string.strNormalize(itens[2].get_text())
+        Disciplinas=[
+        {
+            "codDisciplina": "GCOM5031PE",
+            "codTurma": "T.5031",
+            "media": "",
+            "mediaFinal": "",
+            "nome": "CIRCUITOS LINEARES",
+            "p1": "",
+            "p2": "",
+            "pf": "",
+            "situacao": "Matricula"
+        },
+        {
+            "codDisciplina": "GCOM4022PE",
+            "codTurma": "T.5022",
+            "media": "",
+            "mediaFinal": "",
+            "nome": "PROBABILIDADE E ESTATISTICA",
+            "p1": "",
+            "p2": "",
+            "pf": "",
+            "situacao": "Matricula"
+        },
+        {
+            "codDisciplina": "GCOM0091PE",
+            "codTurma": "T.0091",
+            "media": "",
+            "mediaFinal": "",
+            "nome": "SEGURANCA DE REDES DE COMPUTADORES I",
+            "p1": "",
+            "p2": "",
+            "pf": "",
+            "situacao": "Matricula"
+        },
+        {
+            "codDisciplina": "GCOM6035PE",
+            "codTurma": "T.6035",
+            "media": "",
+            "mediaFinal": "",
+            "nome": "SINAIS E SISTEMAS",
+            "p1": "",
+            "p2": "",
+            "pf": "",
+            "situacao": "Matricula"
+        },
+        {
+            "codDisciplina": "GCOM5035PE",
+            "codTurma": "T.5035",
+            "media": "",
+            "mediaFinal": "",
+            "nome": "SISTEMAS OPERACIONAIS",
+            "p1": "",
+            "p2": "",
+            "pf": "",
+            "situacao": "Matricula"
+        },
+        {
+            "codDisciplina": "GCOM0094PE",
+            "codTurma": "T.0094",
+            "media": "",
+            "mediaFinal": "",
+            "nome": "TOPICOS ESPECIAIS EM COMPUTACAO MOVEL",
+            "p1": "",
+            "p2": "",
+            "pf": "",
+            "situacao": "Matricula"
+        }
+    ]
+        #Periodos=getPeriodo(cookie,matricula)
+        #for i in range(len(Periodos)):
+        #    if (Periodos[i].cod == codPeriodo):
+        #        tabelas = sitePeriodosBS.find_all("table", {"class": "table-turmas"})
+        #        tbody = tabelas[i].find("tbody")
+        #        linhas = tbody.find_all("tr")
+        #        for linha in linhas:
+        #            itens = linha.find_all("td")
+        #            if (len(itens) >= 3):
+        #                disciplina= entity.Disciplina()
+        #                nome, cod = trataDisciplina(itens[0].get_text())
+        #                disciplina.nome          = nome
+        #                disciplina.codDisciplina = cod
+        #                disciplina.situacao      = hel.string.strNormalize(itens[1].get_text())
+        #                disciplina.codTurma      = hel.string.strNormalize(itens[2].get_text())
                         
-                        p1, p2, pf, media, mediaFinal = getNotas(trataLinkDisciplina(itens[3].find("a")['href']), requestSession)
-                        disciplina.p1 = p1
-                        disciplina.p2 = p2
-                        disciplina.pf = pf
-                        disciplina.media = media
-                        disciplina.mediaFinal = mediaFinal
+        #                p1, p2, pf, media, mediaFinal = getNotas(trataLinkDisciplina(itens[3].find("a")['href']), requestSession)
+        #                disciplina.p1 = p1
+        #                disciplina.p2 = p2
+        #                disciplina.pf = pf
+        #                disciplina.media = media
+        #                disciplina.mediaFinal = mediaFinal
                         
-                        Disciplinas.append(disciplina)
+        #                Disciplinas.append(disciplina)
         return Disciplinas
             
     except:
