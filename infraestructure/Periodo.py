@@ -99,8 +99,8 @@ def getDiscByPeriodo(cookie,matricula,codPeriodo):
             "media": "",
             "mediaFinal": "",
             "nome": "CIRCUITOS LINEARES",
-            "p1": "",
-            "p2": "",
+            "p1": "8,2",
+            "p2": "7,2",
             "pf": "",
             "situacao": "Matricula"
         },
@@ -110,7 +110,7 @@ def getDiscByPeriodo(cookie,matricula,codPeriodo):
             "media": "",
             "mediaFinal": "",
             "nome": "PROBABILIDADE E ESTATISTICA",
-            "p1": "",
+            "p1": "3,9",
             "p2": "",
             "pf": "",
             "situacao": "Matricula"
