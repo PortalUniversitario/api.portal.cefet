@@ -160,6 +160,7 @@ def getDiscByPeriodo(cookie,matricula,codPeriodo):
             "situacao": "Matricula"
         }
     ]
+        #TODO: otimizar e retirar dados mokados
         #Periodos=getPeriodo(cookie,matricula)
         #for i in range(len(Periodos)):
         #    if (Periodos[i].cod == codPeriodo):

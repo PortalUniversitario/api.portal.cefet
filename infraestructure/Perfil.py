@@ -22,18 +22,28 @@ def getDadosAcademicos(cookie, matricula):
         raise ValueError("Falha ao acessar portal do aluno", hel.HttpCodes.REQUEST_TIMEOUT)
     
     try:
-        academico = entity.Academico()
-        academico.matricula     = pegaPropriedadePerfil(siteHorarios.content, '.Matrícula:')
-        academico.periodoAtual  = pegaPropriedadePerfil(siteHorarios.content, '.Período Atual:')
-        academico.nome          = pegaPropriedadePerfil(sitePerfil.content, '.Nome')
+        #academico = entity.Academico()
+        #academico.matricula     = pegaPropriedadePerfil(siteHorarios.content, '.Matrícula:')
+        #academico.periodoAtual  = pegaPropriedadePerfil(siteHorarios.content, '.Período Atual:')
+        #academico.nome          = pegaPropriedadePerfil(sitePerfil.content, '.Nome')
         
-        CampusCurso             = trataCampusCurso(pegaPropriedadePerfil(siteHorarios.content, '.Curso:'))
-        academico.codCampus     = CampusCurso[0]
-        academico.curso         = CampusCurso[1]
-        academico.campus        = hel.object.getNomeCampus(academico.codCampus)
+        #CampusCurso             = trataCampusCurso(pegaPropriedadePerfil(siteHorarios.content, '.Curso:'))
+        #academico.codCampus     = CampusCurso[0]
+        #academico.curso         = CampusCurso[1]
+        #academico.campus        = hel.object.getNomeCampus(academico.codCampus)
+        
+        #if (academico.matricula == None):
+        #    raise ValueError("Cookie ou Matrícula Inválidos", hel.HttpCodes.NOT_ACCEPTABLE)
+        
+        #TODO: remover dados mokados
 
-        if (academico.nome == None):
-            raise ValueError("Cookie ou Matrícula Inválidos", hel.HttpCodes.NOT_ACCEPTABLE)
+        academico = entity.Academico()
+        academico.matricula     = 12345
+        academico.periodoAtual  = 6
+        academico.nome          = 'DANIEL VEIGA DA SILVA ANTUNES'
+        academico.codCampus     = 'PET'
+        academico.curso         = 'ENGENHARIA DE COMPUTACAO'
+        academico.campus        = 'PETROPOLIS'
 
         return academico
     except:
